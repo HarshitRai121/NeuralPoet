@@ -1,0 +1,141 @@
+/* static/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    min-height: 100vh;
+    background-image: url('../static/dark.avif');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text__form {
+    width: 100%;
+    max-width: 420px;
+    padding: 4rem 3rem;
+    margin: 1rem;
+    backdrop-filter: blur(8px);
+    border: 2px solid #fff;
+    border-radius: 1.5rem;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: show 0.5s linear forwards;
+}
+
+@keyframes show {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.text__form h1 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+}
+
+.input__row {
+    margin-bottom: 1.5rem;
+    padding-block: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #fff;
+}
+
+.input__group {
+    flex: 1;
+    position: relative;
+    isolation: isolate;
+}
+
+.input__row span {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.input__group label {
+    position: absolute;
+    font-size: 1rem;
+    color: #fff;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.input__group input:not(:placeholder-shown) ~ label,
+.input__group input:focus ~ label {
+    font-size: 0.7rem;
+    top: -1.25rem;
+}
+
+.input__group input {
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: transparent;
+}
+
+#length-eye,
+#temperature-eye {
+    cursor: pointer;
+}
+
+.button__row {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text__btn {
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.text__btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.output {
+    position: relative;
+    padding: 10px;
+    width: 80%; /* Adjust the width as needed */
+    height: 600px;
+    font-size: 1.2em;
+    background: url('{{ url_for("static", filename="img.jpeg") }}') center/cover;
+    overflow-y: auto;
+    color: #fff;
+    text-align: center;
+}
+
+.output p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

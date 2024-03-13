@@ -1,0 +1,64 @@
+
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Text Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form action="/generate_text" class="text__form">
+            <h1>NeuralPoet</h1>
+            <div class="input__row">
+                <span><i class="ri-settings-3-line"></i></span>
+                <div class="input__group">
+                    <input type="number" id="length" name="length" placeholder=" " required />
+                    <label for="length">Length</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <span><i class="ri-temperature-line"></i></span>
+                <div class="input__group">
+                    <input id="temperature" type="number" step="0.1" placeholder=" " required />
+                    <label for="temperature">Temperature</label>
+                </div>
+            </div>
+            <button type="button" onclick="generateText()" class="text__btn">Generate Text</button>
+            <div class="output">
+                <p></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        async function generateText() {
+            const length = document.getElementById('length').value;
+            const temperature = document.getElementById('temperature').value;
+
+            // Send a request to the Flask backend
+            const response = await fetch('/generate_text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',  // Change Content-Type
+                },
+                body: JSON.stringify({ length, temperature }),  // Convert to JSON string
+            });
+
+            // Parse the JSON response
+            const result = await response.json();
+
+            // Log the generated text to the console
+            console.log(result.generated_text);
+
+            // Display the generated text on the page
+            // document.getElementById('output').innerText = `Generated Text: ${result.generated_text}`;
+            // Display the generated text on the page
+            const outputElement = document.querySelector('.output p');
+            outputElement.innerText = `Generated Text: ${result.generated_text}`;
+        }
+    </script>
+</body>
+</html>
